@@ -1,3 +1,4 @@
+
 """Taller evaluable"""
 
 import glob
@@ -52,24 +53,10 @@ def count_words(dataframe):
 
     return dataframe 
 
-def count_words_(dataframe):
-    dataframe = dataframe.copy()
-    dataframe["text"] = dataframe["text"].str.split()
-    dataframe = dataframe.explode("text")
-    dataframe = dataframe["text"].value_counts()
-
-    return dataframe
-
-
-
-
 def save_output(dataframe, output_filename):
     """Save output to a file."""
 
     dataframe.to_csv(output_filename, sep="\t", index=True, header=False)
-
-
-
 
 # Escriba la función job, la cual orquesta las funciones anteriores.
 #
@@ -78,7 +65,7 @@ def run(input_directory, output_filename):
     
     df = load_input(input_directory)
     df = clean_text(df)
-    df = count_words_(df)
+    df = count_words(df)
     save_output(df, output_filename)
 
 if __name__ == "__main__":
