@@ -53,10 +53,20 @@ def count_words(dataframe):
 
     return dataframe 
 
+
+def count_words_(dataframe):
+    dataframe = dataframe.copy()
+    dataframe["text"] = dataframe["text"].str.split()
+    dataframe = dataframe.explode("text")
+    dataframe = dataframe["text"].value_counts()
+
+    return dataframe
+
 def save_output(dataframe, output_filename):
     """Save output to a file."""
 
     dataframe.to_csv(output_filename, sep="\t", index=True, header=False)
+
 
 # Escriba la función job, la cual orquesta las funciones anteriores.
 #
